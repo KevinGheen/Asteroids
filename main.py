@@ -3,6 +3,7 @@ from constants import*
 import player
 import asteroid
 import asteroidfield
+from circleshape import *
 def main():
     pygame.init()
     print("Starting Asteroids!")
@@ -35,6 +36,12 @@ def main():
         pygame.Surface.fill(screen,(0,0,0))
         for updateables in updateable:
             updateables.update(dt)
+        for ast in asteroids:
+            game_over = ship.collision(ast)
+            if game_over == True:
+                print("Game Over!")
+                play = False
+                
         for drawables in drawable:
             drawables.draw(screen)
         dt = clock.tick(frame_rate)/1000
